@@ -1,0 +1,111 @@
+html {
+    font-family: "Helvetica Neue",Roboto,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #050505;
+
+}
+
+
+body {
+    background-color: #F1F2F5;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif;  
+}
+
+a {
+  color: #0188cc;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #050505;
+  padding-top: 0px;
+  margin-top: 0px;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
+}
+
+ul {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+span {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #375eab;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #375eab;
+}
+
+
+h3 {
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #375eab;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #375eab;
+  }
+
+ul {
+    padding-left: 1em;
+    margin: 0px;
+    margin-left: 20px;
+}
+
+li {
+  margin: .5em 0em;
+  padding-left: .5em;
+}
+
+.liSpan
+{
+  font-size: 11px;
+  font-size: 1.1rem;
+}
+
+.hero-title {
+    font-size: 35px;
+    font-size: 3.5rem;
+    letter-spacing: -2.5px;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin: 0;
+    color: #047BEB;
+    white-space: nowrap;
+}
+
+.content {
+  margin: auto;
+  max-width: 960px;
+  width: auto;
+}
+
+.content_block {
+  margin: 0;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border-radius:4px;
+  background-color: white;
+  width: 800px;
+  margin:auto;
+}
+
+
+

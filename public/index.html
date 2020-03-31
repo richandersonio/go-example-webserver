@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="A simple go web server." name="description">  
+  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>richanderson.io</title>
+  <link href="css\simple.css" rel="stylesheet" type="text/css" media="all">  
+  <link rel="apple-touch-icon" href="favicon.ico">
+    <style>
+        .richbutton {border-radius: 28px; width:150px; height:28px; margin-top:4px; background-color: #047BEB; color: white ;}
+
+    </style>
+</head>
+
+<body class="content">
+    
+    <div class="content_block" style="margin-top: 20px;">
+        <div class="hero-title" style="text-align: center;">Simple Web Server in GO</div>
+            <h1>Hello ...</h1>
+            <h2>I dont do much...</h2>
+            <h3>but....</h3>
+            <h4>It is a nice example template to copy to get going!</h4>
+        </div>
+    
+        <div class="content_block" style="margin-top: 20px;">
+            <h4>Example form that send a JSON request to /echo and then shows the JSON response</h4>
+            <form name="myForm" action="/post" method="POST" onsubmit="return echo(this);">
+                <div style="padding-bottom: 10px;"><span style="float:left; width: 80px;">Message:</span><span><input type="text" id="message" name="message" value="" size="80" required autofocus /></span></div>
+                <div><button class="richbutton" type="submit">Submit</button></div>
+            </form>
+    </div>
+    <div class="content_block" style="margin-top: 20px;">
+        <h1 style="margin-top: 0px;">Links</h1>
+        <ul>
+            <li><a href="https://github.com/richandersonio">The GitHub repo for the example web server</a></li>
+            <li><a href="https://golang.org/">The GO web site</a></li>
+        </ul>
+    </div>
+</body>
+
+<script>
+
+function echo() {
+    var url = '/echo';
+    var xhr = createCORSRequest('POST', url);
+
+    xhr.onload = function() {
+        var resp  = JSON.parse(xhr.responseText)
+        if (resp.StatusCode == 0 ) {
+            // hide the form so you can't post again, but say thank you.
+            alert(resp.Message);
+        } else {
+            alert("ok dear, we hit a snag....StatusCode:" + resp.StatusCode + " error: " + resp.ErrorMessage);
+        }
+     };
+
+    xhr.onerror = function() {
+        alert('Woops, there was an error making the request.');
+    };
+
+    var jsonRequest = { 
+        "Message": document.forms['myForm'].message.value,
+    }
+
+    xhr.send(JSON.stringify(jsonRequest))
+  
+    return false;
+}
+
+function createCORSRequest(method, url) {
+ 
+    var xhr = new XMLHttpRequest();
+    
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+    return xhr;
+}
+
+
+</script>
