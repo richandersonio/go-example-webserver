@@ -1,8 +1,6 @@
 # Simple GO Web Server
 
-A simple GO web server that serves static html pages from a public directory and supports a basic JSON API.
-
-The example HTML page calls the "Echo" API and shows the response.
+A simple GO web server that serves static html pages from a public directory and exposes a simple JSON API. The example API is calle by the index.html page.
 
 ## Build and run the web server locally
 
@@ -19,19 +17,19 @@ You can now access the web server on localhost:8080:
 
 ## Build and run the web server in a container
 
-Build the webserver in docker:
+Build the web server in container:
 
 ```bash
 docker build -t go-example-webserver .
 ```
 
-Run the web server in interactive mode available on port 8080:
+Run the web server in interactive mode:
 
 ```bash
 docker run -p 8080:8080 -it go-example-webserver
 ```
 
-Run the web server in interactive mode available on port 8081 and instruct it to send all log messages to  webserver.log vs stdout:
+Run the web server in interactive mode on port 8081 and instruct it to send all log messages to webserver.log vs stdout:
 
 ```bash
 docker run -p 8081:8081 -it -e LOGTOFILE=yes -e PORT=8081 go-example-webserver
@@ -62,3 +60,4 @@ This JSON response echos the input parameter back:
 ```json
 {"StatusCode":0,"Message":"Hello, your message was [rich anderson]","ErrorMessage":""}
 ```
+The index.html example page also calls this api.
