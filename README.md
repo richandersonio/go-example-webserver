@@ -2,15 +2,22 @@
 
 A simple GO web server that serves static html pages from a public directory and supports a basic JSON API.
 
+The example HTML page calls the "Echo" API and shows the response.
+
 ## Build and run the web server locally
 
-Build the webserver:
+Build the webserver and then run the web server:
 
 ```bash
 go build *.go
 ./app
 ```
-## Build and deploy the web server to a small docker container
+
+You can now access the web server on localhost:8080:
+
+![alt text](docs/homepage.png "Title")
+
+## Build and run the web server in a container
 
 Build the webserver in docker:
 
