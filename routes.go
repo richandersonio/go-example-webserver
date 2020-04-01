@@ -8,6 +8,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+// array to keep all of the echo messages sent to the server
+
+var echoMessages []string;
+
 // http handlers
 func setupRoutes() {
 
@@ -51,6 +55,7 @@ func setupRoutes() {
 			StatusCode int 
 			Message   string
 			ErrorMessage string 
+			PreviousMessages []string
 		}
 
 		var req apiRequest
@@ -70,6 +75,9 @@ func setupRoutes() {
 		resp.StatusCode = 0
 		resp.Message = "Hello, your message was [" + req.Message +"]"
 		GetConfig().Greeting = req.Message;
+
+		echoMessages = append(echoMessages, resp.Message)
+		resp.PreviousMessages = echoMessages // send all of the previous messages the server has
 		
 		e.Encode(resp)
 	})

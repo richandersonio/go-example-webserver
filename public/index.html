@@ -13,6 +13,7 @@
 
     </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <body class="content" onload="loaded()">
     
@@ -29,6 +30,11 @@
             <form name="myForm" action="/post" method="POST" onsubmit="return echo(this);">
                 <div style="padding-bottom: 10px;"><span style="float:left; width: 80px;">Message:</span><span><input type="text" id="message" name="message" value="" size="80" required autofocus /></span></div>
                 <div><button class="richbutton" type="submit">Submit</button></div>
+                <ol id="app">
+                    <li v-for="todo in todos">
+                      {{ todo }}
+                    </li>
+                  </ol>
             </form>
     </div>
     <div class="content_block" style="margin-top: 20px;">
@@ -38,16 +44,24 @@
             <li><a href="https://golang.org/">The GO web site</a></li>
         </ul>
     </div>
+
 </body>
 
 <script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    todos: [ "Enter a message and then hit Submit. ", "It will be sent to the server, stored on the messages list and then sent back with any previous messages" ]
+  }
+})
 
 function loaded() {
     var xhr = createCORSRequest('GET', '/greeting');
 
     xhr.onload = function() {
         var resp  = JSON.parse(xhr.responseText)
-        document.getElementById("greeting").innerText = resp.Greeting;
+        app.data.message = resp.Greeting;
      };
 
     xhr.onerror = function() {
@@ -65,7 +79,7 @@ function echo() {
         var resp  = JSON.parse(xhr.responseText)
         if (resp.StatusCode == 0 ) {
             // hide the form so you can't post again, but say thank you.
-            alert(resp.Message);
+            app.todos = resp.PreviousMessages;
         } else {
             alert("ok dear, we hit a snag....StatusCode:" + resp.StatusCode + " error: " + resp.ErrorMessage);
         }
@@ -100,6 +114,5 @@ function createCORSRequest(method, url) {
   }
     return xhr;
 }
-
 
 </script>

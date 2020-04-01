@@ -26,7 +26,7 @@ func createDefaultConfig() (*AppConfig) {
 	cfg = &AppConfig { 
 		DatabaseConnection: getDatabaseConnectionString(),
 		Port: getPort(),
-		Greeting: "Hello from the server",
+		Greeting: "Greetings!",
 		ClientConfig: make(map[string]string),
 	}
 
