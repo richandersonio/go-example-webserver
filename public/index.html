@@ -14,11 +14,11 @@
     </style>
 </head>
 
-<body class="content">
+<body class="content" onload="loaded()">
     
     <div class="content_block" style="margin-top: 20px;">
-        <div class="hero-title" style="text-align: center;">Simple Web Server in GO</div>
-            <h1>Hello ...</h1>
+        <div id="greeting" class="hero-title" style="text-align: center;">Simple Web Server in GO</div>
+            <h1>Greetings</h1>
             <h2>I dont do much...</h2>
             <h3>but....</h3>
             <h4>It is a nice example template to copy to get going!</h4>
@@ -41,6 +41,21 @@
 </body>
 
 <script>
+
+function loaded() {
+    var xhr = createCORSRequest('GET', '/greeting');
+
+    xhr.onload = function() {
+        var resp  = JSON.parse(xhr.responseText)
+        document.getElementById("greeting").innerText = resp.Greeting;
+     };
+
+    xhr.onerror = function() {
+        alert('Woops, there was an error call the greeting api.');
+    };
+
+    xhr.send();
+}
 
 function echo() {
     var url = '/echo';
@@ -70,7 +85,6 @@ function echo() {
 }
 
 function createCORSRequest(method, url) {
- 
     var xhr = new XMLHttpRequest();
     
     if ("withCredentials" in xhr) {

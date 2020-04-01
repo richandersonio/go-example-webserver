@@ -15,7 +15,7 @@ func setupRoutes() {
 	fs := http.FileServer(http.Dir("./public"))
 	http.Handle("/", fs)
 
-	// send back details about the host 
+	// whoareyou api - send back some basic info about the host and process
 	http.HandleFunc("/whoareyou", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0")
 		hostname, _ := os.Hostname()
@@ -24,7 +24,19 @@ func setupRoutes() {
 		fmt.Fprintf(w, "<h4>Pid %d</h4>", os.Getpid())
 	})
 
-	// A simple API that accepts a JSON request and echos back a response
+	// greeting api
+	http.HandleFunc("/greeting", func(w http.ResponseWriter, r *http.Request) {
+		type apiResponse struct {
+			Greeting string 
+		}
+
+		var resp apiResponse
+		resp.Greeting = GetConfig().Greeting
+		var e = json.NewEncoder(w)
+		e.Encode(resp)
+	})
+
+	// echo api - accepts a JSON request and echos back a response
 	http.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
@@ -57,6 +69,8 @@ func setupRoutes() {
 
 		resp.StatusCode = 0
 		resp.Message = "Hello, your message was [" + req.Message +"]"
+		GetConfig().Greeting = req.Message;
+		
 		e.Encode(resp)
 	})
 }

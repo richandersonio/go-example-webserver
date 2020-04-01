@@ -1,3 +1,5 @@
+# push the built docker image to docker hub (can only be run by rich anderson)
+
 if test -f "dockerhub_push.sh"; then
     cd ..
 fi

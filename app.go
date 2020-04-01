@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	// by default just log to stdout, but check for for an environment variable to enable a log file
 	if os.Getenv("LOGTOFILE") == "yes" {
 		// create a log file
@@ -23,7 +22,7 @@ func main() {
 
 	// Say hello and start up the http listener
 	hostname, _ := os.Hostname()
-	log.Printf("web server starting on host [%s]:[%s]\n", hostname, getPort())
+	log.Printf("web server starting on host [%s]:[%s]\n", hostname, GetConfig().Port)
 	setupRoutes()
 	go startHTTPListener()     // handle http requests
 
@@ -34,29 +33,19 @@ func main() {
 	os.Exit(code)
 }
 
-// called to start accept http requests
+// called to start accepting http connections/requests
 func startHTTPListener() {
-	http.ListenAndServe(":"+getPort(), nil)
+	http.ListenAndServe(":"+GetConfig().Port, nil)
 }
 
 // called when the web server is ending by the signal handler.  
 func serverEnding() {
 	hostname, _ := os.Hostname()
-	log.Printf("web server ending on host [%s]:[%s]", hostname, getPort())
+	log.Printf("web server ending on host [%s]:[%s]", hostname, GetConfig().Port)
 }
 
-// Get the port to listen on, checking for an override
 
-func getPort() string {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	return port
-}
-
-// catch common signals to enable handling
-
+// catch common signals to and allow exit processing
 func setupSigtermHandler() chan int {
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan,
@@ -79,6 +68,7 @@ func setupSigtermHandler() chan int {
 				log.Println("signal received: SIGTERM")
 				serverEnding()
 				exitChan <- 0
+
 			case syscall.SIGTSTP:
 				log.Println("signal received: SIGTSTP")
 				serverEnding()
@@ -88,9 +78,9 @@ func setupSigtermHandler() chan int {
 				log.Println("signal received: SIGQUIT")
 				serverEnding()
 				exitChan <- 0
-
+				
 			default:
-				log.Println("signal received: Unknown signal: %v", s)
+				log.Println("signal received: Unknown signal")
 				serverEnding()
 				exitChan <- 1
 			}

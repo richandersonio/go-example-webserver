@@ -4,7 +4,7 @@ A simple GO web server that serves static html pages from a public directory and
 
 ## Build and run the web server locally
 
-Build the webserver and then run the web server:
+Build the web server and then run it:
 
 ```bash
 go build *.go
@@ -15,7 +15,7 @@ You can now access the web server on localhost:8080:
 
 ![alt text](docs/homepage.png "Title")
 
-## Build and run the web server in a container
+## Build and run the web server in a container (15mb)
 
 Build the web server in container:
 

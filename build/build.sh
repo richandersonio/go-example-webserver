@@ -4,5 +4,5 @@ if test -f "build.sh"; then
     cd ..
 fi
 
-go build app.go routes.go
+go build *.go
 ls -l app 
