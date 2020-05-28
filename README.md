@@ -1,6 +1,6 @@
-# Simple GO Web Server
+# Simple GO Web Server 
 
-A simple GO web server that serves static html pages from a public directory and exposes a simple JSON API. The example API is calle by the index.html page.
+A simple GO web server that serves static html pages from a public directory, exposes and consumes a few simple JSON APIs and provides a basic project structure you might like.
 
 ## Build and run the web server locally
 
