@@ -13,17 +13,19 @@
 
     </style>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+<script src="components.js" type="text/javascript"></script>
 
 
 <body class="body main" onload="loaded()">
+    <div id="app">
     
     <div class="content_block" style="margin-top: 20px;">
         <div id="greeting" class="hero-title" style="text-align: center;">Welcome</div>
             <h1>A Simple Web Site powered by a Go Web Server</h1>
-            <h2>I dont do much...</h2>
+            <h2>It does not do much...</h2>
             <h3>but....</h3>
-            <h4>It is a nice example template to copy to get going!</h4>
+            <h4>It is a basic template to copy to get going!</h4>
             <ul>
                 <li><a href="agenda.html">Agenda Example Page</a></li>
                 <li><a href="news.html">News Example Page</a></li>
@@ -35,7 +37,7 @@
             <form name="myForm" action="/post" method="POST" onsubmit="return echo(this);">
                 <div style="padding-bottom: 10px;"><span style="float:left; width: 80px;">Message:</span><span><input type="text" id="message" name="message" value="" size="80" required autofocus /></span></div>
                 <div><button class="richbutton" type="submit">Submit</button></div>
-                <ol id="app">
+                <ol>
                     <li v-for="todo in todos">
                       {{ todo }}
                     </li>
@@ -48,8 +50,21 @@
         <ul>
             <li><a href="https://github.com/richandersonio/go-example-webserver">The GitHub repo for the example web server</a></li>
             <li><a href="https://golang.org/">The GO web site</a></li>
+            <my-header/>
+
         </ul>
     </div>
 
+    <div>
+        <h1>VUE Components 1</h1>
+        <my-counter />
+        <h1>VUE Components 2</h1>
+        <my-counter />
+    </div>
+
+    <my-footer />
+</div>
+
 </body>
 <script src="index.js"></script>
+

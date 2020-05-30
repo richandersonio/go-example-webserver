@@ -188,6 +188,11 @@ li {
 
 }
 
+.footer_a {
+  color: #ecf3f7;
+}
+
+
 @media only screen and (min-width: 768px) {
   .footer {
     position: fixed;
