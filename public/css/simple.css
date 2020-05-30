@@ -6,7 +6,6 @@ html {
 
 }
 
-
 body {
     background-color: #F1F2F5;
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif;  
@@ -108,4 +107,104 @@ li {
 }
 
 
+@keyframes fadein {
+  from { 
+      opacity: 0; 
+      background-color: #ffffff; }
+  to   { 
+      opacity: 1;
+      background-color: #F1F2F5; 
+  }
+}
 
+@keyframes fadein2 {
+  from { 
+      opacity: 0; 
+      background-color: #ffffff; 
+      font-size: 0rem;
+      white-space:nowrap;
+  }
+  to   { 
+      opacity: 1;
+      background-color: #3f687c; 
+      font-size: 1rem;
+  }
+}
+
+.body.main {
+  -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 1.5s; /* Firefox < 16 */
+    -ms-animation: fadein 1.5s; /* Internet Explorer */
+     -o-animation: fadein 1.5s; /* Opera < 12.1 */
+        animation: fadein 1.5s;
+}
+
+
+/* phones */
+@media only screen and (max-width: 767px) {
+  .content {
+    max-width: auto;
+    width: auto;
+  }
+
+  .content_block {
+    width: auto;
+    margin:auto;
+  }
+
+  .head {
+    height: 5.25rem;
+  }
+
+  .hero-title {
+    font-size: 35px;
+    font-size: 2.7rem;
+    letter-spacing: -2.5px;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  img.crop-circle {
+    border-radius: 900px;
+    border-top-left-radius: 900px;
+    border-top-right-radius: 900px;
+    border-bottom-right-radius: 900px;
+    border-bottom-left-radius: 900px;
+    height: 60px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding: 3px;
+  }
+
+
+  .modal-content {
+    position: absolute;
+    vertical-align: center;
+    width: 95%;
+    height: 95%;
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    opacity: .9;
+    background-color: #3f687c; 
+
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    -webkit-animation: fadein2 1.0s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein2 1.0s; /* Firefox < 16 */
+      -ms-animation: fadein2 1.0s; /* Internet Explorer */
+      -o-animation: fadein2 1.0s; /* Opera < 12.1 */
+          animation: fadein2 1.0s;
+  }
+}
