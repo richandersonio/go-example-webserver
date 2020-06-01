@@ -3,9 +3,13 @@ var app = new Vue({
     el: '#app',
     data: {
       todos: [ "Enter a message and then hit Submit. ", "It will be sent to the server, stored on the messages list and then sent back with any previous messages" ],
-      message: ""
+      message: "",
+      editMode: true,
+      editForm: {
+          name: ""
+      }
     }
-  })
+  });
 
 function loaded() {
 
@@ -53,21 +57,3 @@ function echo() {
     return false;
 }
 
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    
-    if ("withCredentials" in xhr) {
-        // XHR for Chrome/Firefox/Opera/Safari.
-        xhr.open(method, url, true);
-    } 
-    else if (typeof XDomainRequest != "undefined") {
-        // XDomainRequest for IE.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-    } 
-    else {
-        // CORS not supported.
-        xhr = null;
-    }
-    return xhr;
-}

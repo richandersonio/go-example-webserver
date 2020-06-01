@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="A simple go web server." name="description">  
+  <link rel="icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPT</title>
+  <link rel="apple-touch-icon" href="favicon.ico">
+    <style>
+
+html {
+            height: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+body {
+            height: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .player {
+            height: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body id="body" class="body">
+    <div id="ytplayer" height="100%" width="100%"></div>
+<script>
+// 
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+   
+    go();
+
+  }
+
+</script>
+
+</body>
+
+<script>
+
+function go() {
+    player = new YT.Player('ytplayer', {
+      height: "100%",
+      width: "100%",
+      videoId: 'dsGjGV8IXD0',
+      events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          },
+    playerVars: { 
+        'controls': 0, 
+        'rel' : 0,
+        'fs' : 0,
+        'disablekb': 1,
+        'modestbranding': 1
+    }
+    });
+
+}
+
+// The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+// 5. The API calls this function when the player's state changes.
+//    The function indicates that when playing a video (state=1),
+//    the player should play for six seconds and then stop.
+var done = false;
+function onPlayerStateChange(event) {
+if (event.data == YT.PlayerState.PLAYING && !done) {
+    //    setTimeout(stopVideo, 6000);
+    //done = true;
+} 
+else if (event.data === 0) {
+        window.location = "agenda.html"
+} 
+}
+function stopVideo() {
+    player.stopVideo();
+    ytplayer.style = "display: none";
+
+}
+
+</script>
