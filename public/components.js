@@ -7,12 +7,11 @@ Vue.component('my-counter', {
     template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
 });
 
-
 Vue.component('my-header', {
     props: ['active'],
     data: function () {
       return {
-        active: 0,
+        active: "",
         editMode: false,
         editForm: {
             name: '',
@@ -44,21 +43,23 @@ Vue.component('my-header', {
     <header class="header">
         <div class="header-content">
             <div class="header-logo">
-                <a href="index.html">
-                    <img src="images/gptconnect.jpeg" width="96%" >
+                <a href="index.html">Your Site Logo Here
                 </a>
             </div>
             <nav class="header-nav" role="navigation">
                 <div>
                     <ul class="header-nav">
                         <li>
-                            <a href="index.html" v-bind:class="active == 0 ? 'header_a_selected' : 'header_a' ">Welcome</a>
+                            <a href="index.html" v-bind:class="active == 'index' ? 'header_a_selected' : 'header_a' ">About</a>
                         </li>
                         <li>
-                            <a href="agenda.html"  v-bind:class="active == 1 ? 'header_a_selected' : 'header_a' ">Agenda</a>
+                            <a href="agenda.html"  v-bind:class="active == 'agenda' ? 'header_a_selected' : 'header_a' ">Schedule</a>
                         </li>
                         <li>
-                            <a href="news.html"  v-bind:class="active == 2 ? 'header_a_selected' : 'header_a' ">News</a>
+                            <a href="speakers.html" v-bind:class="active == 'speakers' ? 'header_a_selected' : 'header_a' ">Speakers</a>
+                        </li>
+                        <li>
+                            <a href="news.html"  v-bind:class="active == 'news' ? 'header_a_selected' : 'header_a' ">News</a>
                         </li>
                     </ul>
                 </div>
@@ -92,7 +93,7 @@ Vue.component('my-footer', {
     },
     template: `
     <div class="footer" id="f">
-        <div align="center">© 2020 You · <a href="https://twitter.com/richanderson" class="footer_a" target="_social">Twitter</a> 
+        <div align="center">© 2020 You · <a href="https://twitter.com/richanderson" class="footer_a" target="_social">Twitter</a></div>
     </div>
           `
 });
@@ -104,14 +105,32 @@ Vue.component('my-speakerinfo', {
         hidden: true,
         current: {
             speakerInfo: null,
-            name: "bob anderson"
+            name: "bob anderson",
+            sessions: []
         }
       }
     },
     methods: {
 
+        getSpeakerSessions: function() {
+            // find all of the sessions for the current speaker
+            var speakerSessions = [];
+
+            if (this.current.speakerInfo === null)
+                return;
+
+            app.agenda.day1.sessions.forEach(session => {
+                if (session.speaker === this.current.speakerInfo.name) {
+                    speakerSessions.push(session);    
+                    session.day = "Day 1";
+                }
+            });
+
+            this.current.sessions = speakerSessions;
+        },
         show: function() {
             this.hidden = false;
+            this.getSpeakerSessions();
         },
         hide: function() {
           this.hidden = true;
@@ -138,6 +157,20 @@ Vue.component('my-speakerinfo', {
                 <div v-if="current.speakerInfo != null && current.speakerInfo.title != null" style="color:grey;font-size:.8em;">{{current.speakerInfo.title}}</div>
                 <div v-if="current.speakerInfo != null && current.speakerInfo.bio != null" style="padding-top:10px; color:white;">{{current.speakerInfo.bio}}</div>
             </div>
+            
+            <div v-if="current.sessions.length >0"> 
+                <div v-for="(session,index) in current.sessions" >
+                    <div style="padding-top:30px; padding-left:20px; max-width:800px">
+                       <div style="color:grey; font-size:.8em; display:block;">{{session.day}}</div>
+                      <div style="color:white; font-size:1.5em; display:block;">{{session.title }}</div>
+                      <div style="color:grey; font-size:.8em; display:block;">track: {{session.track}}</div>
+                      <div v-if="session.description1" style="color:#bbbbbb; padding-top:20px; font-weight:400;">{{session.description1}}</div>
+                      <div v-if="session.description2" style="color:#bbbbbb; padding-top:20px;">{{session.description2}}</div>
+                      <div v-if="session.description3" style="color:#bbbbbb; ;padding-top:20px;">{{session.description3}}</div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
       </div>
     </header>

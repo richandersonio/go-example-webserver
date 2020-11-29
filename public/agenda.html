@@ -75,7 +75,6 @@
 
 </style>
  
-<link href="css\blue.css" rel="stylesheet" type="text/css" media="all">  
 </head>
 <script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
 <script src="components.js" type="text/javascript"></script>
@@ -84,7 +83,7 @@
 
 <body class="body main" onload="loaded()">
 <div id="app">
-    <my-header active=1></my-header>
+    <my-header active="agenda"></my-header>
     <div id="page_content" class="page_content">
 
         <div v-if="agenda != null" class="content_block" style="margin-top: 20px;" >
@@ -97,7 +96,7 @@
                     <div class="td">Speaker</div>
                 </div>
                 
-                <div class="tr" v-for="(session,index) in agenda.day1.sessions" v-on:click="onShowInfo(1,index)" data="hi rich" >
+                <div class="tr" v-for="(session,index) in agenda.day1.sessions" v-on:click="onShowInfo(1,index)" style="cursor: pointer;" >
                     <div v-if="index ==0 || (index != 0 && agenda.day1.sessions[index].time != agenda.day1.sessions[index-1].time)" class="td" style="flex-grow: .5;"><span>{{ session.time }}</span></div>
                     <div v-if="index != 0 && agenda.day1.sessions[index].time == agenda.day1.sessions[index-1].time" class="td" style="flex-grow: .5;"></div>
                     <div class="td talk_title" style="flex-grow: 2;" ><span>{{ session.title }}</span></div>
@@ -117,7 +116,7 @@
                     <div class="td">Speaker</div>
                 </div>
                 
-                <div class="tr" v-for="(session,index) in agenda.day2.sessions">
+                <div class="tr" v-for="(session,index) in agenda.day2.sessions"  v-on:click="onShowInfo(2,index)" style="cursor: pointer;">
                     <div v-if="index ==0 || (index != 0 && agenda.day2.sessions[index].time != agenda.day2.sessions[index-1].time)" class="td" style="flex-grow: .5;"><span>{{ session.time }}</span></div>
                     <div v-if="index != 0 && agenda.day2.sessions[index].time == agenda.day2.sessions[index-1].time" class="td" style="flex-grow: .5;"></div>
                     <div class="td talk_title" style="flex-grow: 2;" ><span>{{ session.title }}</span></div>
@@ -137,7 +136,7 @@
                     <div class="td">Speaker</div>
                 </div>
                 
-                <div class="tr" v-for="(session,index) in agenda.day3.sessions">
+                <div class="tr" v-for="(session,index) in agenda.day3.sessions" v-on:click="onShowInfo(3,index)"  style="cursor: pointer;">
                     <div v-if="index ==0 || (index != 0 && agenda.day3.sessions[index].time != agenda.day3.sessions[index-1].time)" class="td" style="flex-grow: .5;"><span>{{ session.time }}</span></div>
                     <div v-if="index != 0 && agenda.day3.sessions[index].time == agenda.day3.sessions[index-1].time" class="td" style="flex-grow: .5;"></div>
                     <div class="td talk_title" style="flex-grow: 2;" ><span>{{ session.title }}</span></div>
@@ -168,7 +167,7 @@ var app = new Vue({
 
             if (day === 1) 
                 sessions = app.agenda.day1.sessions;
-            else if (day === 1) 
+            else if (day === 2) 
                 sessions = app.agenda.day2.sessions;
             else  
                 sessions = app.agenda.day3.sessions;
@@ -176,19 +175,14 @@ var app = new Vue({
             if (sessions[index].speaker === "")
                 return;
                 
-            console.log(sessions[index].time);
-            console.log(sessions[index].title);
-            console.log("speaker:" + sessions[index].speaker);
-            console.log(sessions[index].track);
-            console.log(this.$refs.speakerinfo)
-            console.log("speakers = " + this.agenda.speakers.length);
+          
             for(var i=0; i<this.agenda.speakers.length; i++) {
                 console.log(this.agenda.speakers[i].name + "!")
                 if (this.agenda.speakers[i].name === sessions[index].speaker) {
                     speakerInfo = this.agenda.speakers[i];
                     break;
                 }
-            }
+            }          
 
             this.$refs.speakerinfo.current.speakerInfo = speakerInfo;
             this.$refs.speakerinfo.current.name = sessions[index].speaker;
