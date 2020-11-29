@@ -13,48 +13,19 @@
 
     </style>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
 <script src="components.js" type="text/javascript"></script>
 <script src="util.js" type="text/javascript"></script>
 
 
-<body class="body main" onload="loaded()">
+<body class="body main">
+
 <div id="app">
-    <my-header active="index"></my-header>
-
-    <div id="page_content" class="page_content">
-        <div class="content_block" style="margin-top: 20px;">
-            <h1>A Simple Web Site Powered by a Go Web Server</h1>
-                <h2>It does not do much...</h2>
-                <h3>but....</h3>
-                <h4>It is a basic template to copy to get going!</h4>
-            </div>
-        
-            <div class="content_block" style="margin-top: 20px;">
-                <h4>Example form that send a JSON request to /echo and then shows the JSON response</h4>
-                <form name="myForm" action="/post" method="POST" onsubmit="return echo(this);">
-                    <div style="padding-bottom: 10px;"><span style="float:left; width: 80px;">Message:</span><span><input type="text" id="message" name="message" value="" size="80" required autofocus /></span></div>
-                    <div><button class="richbutton" type="submit">Submit</button></div>
-                    <ol>
-                        <li v-for="todo in todos">
-                        {{ todo }}
-                        </li>
-                    </ol>
-                </form>
-        </div>
-        
-        <div class="content_block" style="margin-top: 20px;">
-            <h1 style="margin-top: 0px;">Links</h1>
-            <ul>
-                <li><a href="https://github.com/richandersonio/go-example-webserver">The GitHub repo for the example web server</a></li>
-                <li><a href="https://golang.org/">The GO web site</a></li>
-
-            </ul>
-        </div>
-    </div>
-
-
-    <my-footer />
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
 </div>
 
 </body>

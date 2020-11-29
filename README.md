@@ -61,3 +61,13 @@ This JSON response echos the input parameter back:
 {"StatusCode":0,"Message":"Hello, your message was [rich anderson]","ErrorMessage":""}
 ```
 The index.html example page also calls this api.
+
+
+# History
+
+## Nov 28th 2020
+
+Revert style back to simple original website.
+
+Updated to use Vue 3 and Router for page navigation.
+
