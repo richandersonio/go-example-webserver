@@ -9,10 +9,10 @@ hooks:
       timeout: 10
       runas: ec2-user
   ApplicationStart:
-    - location: goexamplewebserver/admin/start_service.sh
+    - location: admin/start_service.sh
       timeout: 300
       runas: ec2-user
   ApplicationStop:
-    - location: goexamplewebserver/admin/stop_service.sh
+    - location: admin/stop_service.sh
       timeout: 300
       runas: ec2-user
