@@ -16,5 +16,6 @@ artifacts:
   files:
     - app
     - public/**/*
+    - admin/**/*
     - appspec.yml
   discard-paths: no
