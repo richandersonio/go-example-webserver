@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user
+hooks:
+  BeforeInstall:
+    - location: admin/myservice/stop_service.sh
+      timeout: 10
+      runas: ec2-user
+  ApplicationStart:
+    - location: admin/myservice/start_service.sh
+      timeout: 300
+      runas: ec2-user
+  ApplicationStop:
+    - location: admin/myservice/stop_service.sh
+      timeout: 300
+      runas: ec2-user
