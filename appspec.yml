@@ -5,14 +5,14 @@ files:
     destination: /home/ec2-user/goexamplewebserver
 hooks:
   BeforeInstall:
-    - location: goexamplewebserver/admin/myservice/stop_service.sh
+    - location: goexamplewebserver/admin/stop_service.sh
       timeout: 10
       runas: ec2-user
   ApplicationStart:
-    - location: goexamplewebserver/admin/myservice/start_service.sh
+    - location: goexamplewebserver/admin/start_service.sh
       timeout: 300
       runas: ec2-user
   ApplicationStop:
-    - location: goexamplewebserver/admin/myservice/stop_service.sh
+    - location: goexamplewebserver/admin/stop_service.sh
       timeout: 300
       runas: ec2-user
