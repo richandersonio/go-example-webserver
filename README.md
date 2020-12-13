@@ -62,8 +62,11 @@ This JSON response echos the input parameter back:
 ```
 The index.html example page also calls this api.
 
-
 # History
+
+## Dec 13th 2020
+
+AWS Code Build (buildpspec.yml) & AWS Code Deploy support added (appspec.yml).  Includes Systemd config run the web site as a service (see the admin folder).  
 
 ## Nov 28th 2020
 
