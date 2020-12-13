@@ -2,17 +2,17 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ec2-user
+    destination: /home/ec2-user/goexamplewebserver
 hooks:
   BeforeInstall:
-    - location: admin/myservice/stop_service.sh
+    - location: goexamplewebserver/admin/myservice/stop_service.sh
       timeout: 10
       runas: ec2-user
   ApplicationStart:
-    - location: admin/myservice/start_service.sh
+    - location: goexamplewebserver/admin/myservice/start_service.sh
       timeout: 300
       runas: ec2-user
   ApplicationStop:
-    - location: admin/myservice/stop_service.sh
+    - location: goexamplewebserver/admin/myservice/stop_service.sh
       timeout: 300
       runas: ec2-user

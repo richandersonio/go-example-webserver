@@ -1,0 +1,12 @@
+[Unit]
+Description=my go example web server service
+After=cloud-final.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ec2-user/goexamplewebserver
+ExecStart=/bin/bash /home/ec2-user/goexamplewebserver/admin/start.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
