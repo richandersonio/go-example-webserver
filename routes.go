@@ -5,12 +5,13 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
 // array to keep all of the echo messages sent to the server
 
-var echoMessages []string;
+var echoMessages []string
 
 // http handlers
 func setupRoutes() {
@@ -23,7 +24,7 @@ func setupRoutes() {
 	http.HandleFunc("/whoareyou", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0")
 		hostname, _ := os.Hostname()
-		fmt.Fprintf(w, "<h1>Who am I</h1>")
+		fmt.Fprintf(w, "<h1>Who am I...</h1>")
 		fmt.Fprintf(w, "<h4>Hostname %s</h4>", hostname)
 		fmt.Fprintf(w, "<h4>Pid %d</h4>", os.Getpid())
 	})
@@ -31,7 +32,7 @@ func setupRoutes() {
 	// greeting api
 	http.HandleFunc("/greeting", func(w http.ResponseWriter, r *http.Request) {
 		type apiResponse struct {
-			Greeting string 
+			Greeting string
 		}
 
 		var resp apiResponse
@@ -48,13 +49,13 @@ func setupRoutes() {
 		}
 
 		type apiRequest struct {
-			Message    string
+			Message string
 		}
 
 		type apiResponse struct {
-			StatusCode int 
-			Message   string
-			ErrorMessage string 
+			StatusCode       int
+			Message          string
+			ErrorMessage     string
 			PreviousMessages []string
 		}
 
@@ -73,12 +74,12 @@ func setupRoutes() {
 		}
 
 		resp.StatusCode = 0
-		resp.Message = "Hello, your message was [" + req.Message +"]"
-		GetConfig().Greeting = req.Message;
+		resp.Message = "Hello, your message was [" + req.Message + "]"
+		GetConfig().Greeting = req.Message
 
 		echoMessages = append(echoMessages, resp.Message)
 		resp.PreviousMessages = echoMessages // send all of the previous messages the server has
-		
+
 		e.Encode(resp)
 	})
 }
